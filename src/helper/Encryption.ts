@@ -8,8 +8,8 @@ let password="PixaliveService";
 let conversionOutput:string;
 
 /**
- * @author Mohanraj V / Santhosh 
- * @date  22-09-2023
+ * @author kaaviyan  
+ * @date  09-02-2025
  * @description This function return password encryption.
  * @param {String} text
  */
@@ -35,8 +35,8 @@ export let encrypt = (textToConvert) => {
 };
 
 /**
- * @author Mohanraj V / Santhosh
- * @date  22-09-2022
+ * @author kaaviyan 
+ * @date  09-02-2025
  * @description This function return encrypted item for given string using cryptojs
  * @param {String} text
  */
