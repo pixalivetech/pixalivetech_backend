@@ -21,6 +21,10 @@ export let CreateJWTToken = (data: any = {}) => {
     if (data && data['name']) {
         tokenData['name'] = data['name']
     }
+
+    if (data && data['email']) {
+        tokenData['email'] = data['email']
+    }
   
     const token = jwt.sign(tokenData, 'PixaliveTech', { expiresIn: '365D' });
     return token;

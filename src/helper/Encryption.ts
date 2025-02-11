@@ -27,7 +27,7 @@ export let hashPassword = async (text) => {
  * @description This function return decrypted item for given encryption using cryptojs
  * @param {String} encrypted
  */
-export let encrypt = (textToConvert) => {
+export let  encrypt = (textToConvert) => {
   return (conversionOutput = CryptoJS.AES.encrypt(
     textToConvert.trim(),
     password.trim()
