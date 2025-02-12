@@ -81,12 +81,8 @@ export let getAllUser = async(req,res,next)=>{
 
 export let deletedUsers = async (req, res, next) => {
     try {
-        let {modifiedBy,modifiedOn} = req.body;
-        const usersData = await Contact.findByIdAndUpdate({_id:req.body._id},
-            {$set:{isDeleted:true,
-             modifiedBy:modifiedBy,
-             modifiedOn:modifiedOn
-    }});
+        const usersData = await Contact.findByIdAndUpdate({_id:req.query._id},
+            {$set:{isDeleted:true  }});
     response(req, res, activity, 'Level-2', 'Delete-Users', true, 200, usersData, clientError.success.deleteSuccess);
     } catch (error: any) {
         response(req, res, activity, 'Level-3', 'Delete-Users', false, 500, {}, errorMessage.internalServer, error.message);

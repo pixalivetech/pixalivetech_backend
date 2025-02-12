@@ -1,11 +1,12 @@
 import mongoose from "mongoose";
 
 export interface ContactDocument extends mongoose.Document{
-    _id?:String;
+    _id?:any;
     name?:String;
     email?:String;
     mobileNumber?:Number;
-    messages?:String;
+    subject?:String;
+    message?:String;
     status?:Number;
     isDeleted?:Boolean;
     createdOn?:Date;
@@ -20,7 +21,8 @@ const ContactSchema= new mongoose.Schema({
     name:{type:String},
     email:{type:String},
     mobileNumber:{type:Number},
-    messages:{type:String},
+    subject:{type:String},
+    message:{type:String},
     status: {type:Number,default:1},
     isDeleted: {type: Boolean,default: false},
     createdOn: {type: Date},
