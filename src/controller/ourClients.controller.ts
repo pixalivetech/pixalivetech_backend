@@ -53,7 +53,7 @@ export let getOurClients = async (req, res, next) => {
  */
 export let getSingleOurClients = async (req, res, next) => {
     try {
-        const getSingleOurClients = await OurClients.findOne({ _id: req.query.id, isDeleted: false });
+        const getSingleOurClients = await OurClients.findOne({ _id: req.query._id, isDeleted: false });
         response(req, res, activity, 'Level-2', 'Get-SingleOurClients', true, 200, getSingleOurClients, clientError.success.fetchedSuccessfully);
     } catch (err: any) {
         response(req, res, activity, 'Level-3', 'Get-SingleOurClients', false, 500, {}, errorMessage.internalServer, err.message);
@@ -106,7 +106,13 @@ export let updateOurClients = async (req, res, next) => {
  */
 export let deleteOurClients = async (req, res, next) => {
     try {
-        const deleteOurClients = await OurClients.findOneAndUpdate({ _id: req.query.id },{ isDeleted: true }, { new: true });
+        const deleteOurClients = await OurClients.findOneAndUpdate({ _id: req.query._id },{
+            $set: {
+                isDeleted: true,
+                modifiedOn: req.body.modifiedOn,
+                modifiedBy: req.body.modifiedBy
+            }
+        }, { new: true });
         response(req, res, activity, 'Level-2', 'Delete-OurClients', true, 200, deleteOurClients, clientError.success.deleteSuccess);
     } catch (err: any) {
         response(req, res, activity, 'Level-3', 'Delete-OurClients', false, 500, {}, errorMessage.internalServer, err.message);

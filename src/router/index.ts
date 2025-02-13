@@ -4,9 +4,11 @@ import Admin from './admin.routes';
 import Login from './login.routes';
 import ContactUs from './contactUs.routes';
 import OurClients from './ourClients.routes';
+import LaptopRental from './laptopRental.routes';
 router.use('/admin', Admin);
 router.use('/login', Login);
 router.use('/contactUs',ContactUs)
 router.use('/ourClients',OurClients)
+router.use('/laptopRental',LaptopRental)
 
 export default router

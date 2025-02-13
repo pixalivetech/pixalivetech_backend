@@ -1,6 +1,6 @@
 import {Router} from "express";
 const router:Router = Router();
-import { saveOurClients,getOurClients ,updateOurClients,deleteOurClients} from "../controller/ourClients.controller";
+import { saveOurClients,getOurClients ,getSingleOurClients,updateOurClients,deleteOurClients} from "../controller/ourClients.controller";
 import {basicAuthUser} from "../middleware/checkAuth";
 import { checkQuery,checkRequestBodyParams } from "../middleware/Validators";
 import { checkSession } from "../utils/tokenManager";
@@ -13,7 +13,6 @@ router.post('/', //save contact  // without checking session
 
 router.get('/', //get all contact   
     basicAuthUser,
-    checkSession,
     getOurClients
 );
 
@@ -21,7 +20,7 @@ router.get('/getSingleClient',  //get single user
     basicAuthUser,
     checkSession,
     checkQuery('_id'),
-    getOurClients
+    getSingleOurClients
 );
 
 router.put('/',  //update user   
