@@ -17,6 +17,7 @@ export interface LaptopRentalDocument extends mongoose.Document {
 
 const LaptopRentalSchema = new mongoose.Schema({
     _id: { type: mongoose.Types.ObjectId, required: true, auto: true },
+    adminId:{type:mongoose.Types.ObjectId,ref:"AdminPanel"},
     title: { type: String },
     desc: { type: String },
     price: { type: String },

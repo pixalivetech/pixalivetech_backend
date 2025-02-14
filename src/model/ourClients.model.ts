@@ -15,6 +15,7 @@ export interface OurClientsDocument extends mongoose.Document{
 
 const OurClientsSchema= new mongoose.Schema({
     _id:{type:mongoose.Types.ObjectId,required:true,auto:true},
+    adminId:{type:mongoose.Types.ObjectId,ref:"AdminPanel"},
     name:{type:String},
     logo:{type:String},
     status: {type:Number,default:1},
