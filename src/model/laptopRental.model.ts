@@ -4,7 +4,7 @@ export interface LaptopRentalDocument extends mongoose.Document {
     _id?: any;
     title: String;
     desc: String;
-    price: Number;
+    price:String;
     img: String;
     status?: Number;
     isDeleted?: Boolean;
@@ -19,7 +19,7 @@ const LaptopRentalSchema = new mongoose.Schema({
     _id: { type: mongoose.Types.ObjectId, required: true, auto: true },
     title: { type: String },
     desc: { type: String },
-    price: { type: Number },
+    price: { type: String },
     img: { type: String },
     status: { type: Number, default: 1 },
     isDeleted: { type: Boolean, default: false },

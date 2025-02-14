@@ -16,7 +16,7 @@ router.get('/', //get all contact
     getLaptopRental
 );
 
-router.get('/getSingleClient',  //get single user   
+router.get('/getSingleRental',  //get single user   
     basicAuthUser,
     checkSession,
     checkQuery('_id'),
