@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 export interface OurClientsDocument extends mongoose.Document{
     _id?:any;
+    adminId?:any;
     name?:String;
     logo?:String;
     status?:Number;

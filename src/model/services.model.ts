@@ -1,39 +1,45 @@
 import * as mongoose from "mongoose";
 
 export interface ServicesDocument extends mongoose.Document {
+    _id:any;
+    adminId: any;
     title: string;
-    breadcrumb: string;
-    introduction: string;
+    introduction: any[];
     expertiseTitle: string;
-    expertiseList: { platform: string; technologies: string }[];
-    callToAction: {
-        text: string;
-        linkText: string;
-        linkUrl: string;
-    };
-    createdOn?: Date;
-    modifiedOn?: Date;
+    expertiseList: any[];
+    callToAction: any;
+    status: number;
+    isDeleted: boolean;
+    createdOn: Date;
+    createdBy: string;
+    modifiedOn: Date;
+    modifiedBy: string;
 }
 
 
 const servicesSchema = new mongoose.Schema({
-    title: { type: String, required: true },
-    breadcrumb: { type: [String], required: true },
-    introduction: { type: [String], required: true },
-    expertiseTitle: { type: String, required: true },
+    _id: { type: mongoose.Types.ObjectId, required: true, auto: true },
+    adminId:{type:mongoose.Types.ObjectId,ref:"AdminPanel"},
+    title: { type: String },
+    introduction: [ { type: String}],
+    expertiseTitle: { type: String },
     expertiseList: [
         {
-            platform: { type: String, required: true },
-            technologies: { type: String, required: true }
+            platform: { type: String },
+            technologies: { type: String}
         }
     ],
     callToAction: {
-        text: { type: String, required: true },
-        linkText: { type: String, required: true },
-        linkUrl: { type: String, required: true }
+        text: { type: String},
+        linkText: { type: String },
     },
-    createdOn: { type: Date, default: Date.now },
-    modifiedOn: { type: Date }
+    status: {type:Number,default:1},
+    isDeleted: {type: Boolean,default: false},
+    createdOn: {type: Date},
+    createdAt: { type: Date, default: Date.now, index: true },
+    createdBy: {type: String},
+    modifiedOn: {type: Date},
+    modifiedBy: {type: String},
 });
 
 

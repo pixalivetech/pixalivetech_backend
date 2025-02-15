@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 export interface LaptopRentalDocument extends mongoose.Document {
     _id?: any;
+    adminId?:any;
     title: String;
     desc: String;
     price:String;

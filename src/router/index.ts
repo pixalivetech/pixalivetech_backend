@@ -5,10 +5,12 @@ import Login from './login.routes';
 import ContactUs from './contactUs.routes';
 import OurClients from './ourClients.routes';
 import LaptopRental from './laptopRental.routes';
+import Services from './services.routes';
 router.use('/admin', Admin);
 router.use('/login', Login);
 router.use('/contactUs',ContactUs)
 router.use('/ourClients',OurClients)
 router.use('/laptopRental',LaptopRental)
+router.use('/services',Services)
 
 export default router
