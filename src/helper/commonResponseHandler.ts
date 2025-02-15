@@ -36,25 +36,29 @@ export let response = function (req, res, activity, level, method, success, stat
         statusCode: statusCode
     });
 }
-8
 
 
-export const sendEmail = async (req, email, subject?: any, text?: any) => {
+
+export const sendEmail = async (contact) => {
     var sender = nodemailer.createTransport({
-        service: 'outlook',
-        port: 587,  //587
-        secure: false, // true for 465, false for other ports
+        service: 'gmail',
         auth: {
-            user: 'info@Pixalive.me', 
-            pass:'Pale2468'
+            user: 'pixalivetech', 
+            pass:'ykvq gnvt lslu gjii'
         }
     });
 
     var composemail = {
-        from: 'info@Pixalive.me',
-        to: email,
-        subject: subject,
-        text: text
+        from: contact.email,
+        to: 'pixalivetech@gmail.com', 
+        subject: `New Contact: ${contact.subject}`,
+    text: `
+      Name: ${contact.name}
+      Email: ${contact.email}
+      Mobile Number: ${contact.mobileNumber}
+      Subject: ${contact.subject}
+      Message: ${contact.message}
+    `,
     }
 
     await sender.sendMail(composemail, function (error, info) {

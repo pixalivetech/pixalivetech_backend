@@ -1,5 +1,5 @@
 import { Contact,ContactDocument } from "../model/contactUs.model";
-import {response} from "../helper/commonResponseHandler";
+import {response, sendEmail} from "../helper/commonResponseHandler";
 import{errorMessage,clientError} from "../helper/ErrorMessage";
 import{validationResult} from "express-validator";
 
@@ -22,7 +22,7 @@ export let saveContact = async (req, res, next) => {
             const createContact: ContactDocument = req.body;
             const createData = new Contact(createContact);
             const insertData = await createData.save();
-           
+            await sendEmail(insertData);
             response(req,res,activity,'Level-2','Save-Contact',true,200,insertData,clientError.success.savedSuccessfully);
         } catch (err:any){
             response(req,res,activity,'Level-3','Save-Contact',false,500,{},errorMessage.internalServer, err.message);
