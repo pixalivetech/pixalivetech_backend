@@ -7,6 +7,8 @@ import OurClients from './ourClients.routes';
 import LaptopRental from './laptopRental.routes';
 import Services from './services.routes';
 import WorkingSpace from './coworkingSpace.routes'
+import Jobopenings  from './jobOpenings.routes';
+import HireDevelopers from './hireDevelopers.routes';
 router.use('/admin', Admin);
 router.use('/login', Login);
 router.use('/contactUs',ContactUs)
@@ -14,5 +16,7 @@ router.use('/ourClients',OurClients)
 router.use('/laptopRental',LaptopRental)
 router.use('/services',Services)
 router.use('/workingSpace',WorkingSpace)
+router.use('/jobOpening',Jobopenings)
+router.use('/hireDevelopers',HireDevelopers)
 
 export default router
