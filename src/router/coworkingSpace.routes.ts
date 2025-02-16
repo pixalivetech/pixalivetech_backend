@@ -16,7 +16,7 @@ router.get('/',
     getWorkingSpace
 );
 
-router.get('/getSingleWorkingSpace',   
+router.get('/getSingleSpace',   
     basicAuthUser,
     checkSession,
     checkQuery('_id'),
