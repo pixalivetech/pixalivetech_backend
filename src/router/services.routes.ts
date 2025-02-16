@@ -18,7 +18,7 @@ router.get('/',
 
 router.get('/getSingleService',   
     basicAuthUser,
-    checkSession,
+    // checkSession,
     checkQuery('_id'),
     getSingleServices
 );
