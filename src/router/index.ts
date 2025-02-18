@@ -9,6 +9,7 @@ import Services from './services.routes';
 import WorkingSpace from './coworkingSpace.routes'
 import Jobopenings  from './jobOpenings.routes';
 import HireDevelopers from './hireDevelopers.routes';
+import Apply from './apply.routes';
 router.use('/admin', Admin);
 router.use('/login', Login);
 router.use('/contactUs',ContactUs)
@@ -18,5 +19,6 @@ router.use('/services',Services)
 router.use('/workingSpace',WorkingSpace)
 router.use('/jobOpening',Jobopenings)
 router.use('/hireDevelopers',HireDevelopers)
+router.use('/apply',Apply)
 
 export default router
