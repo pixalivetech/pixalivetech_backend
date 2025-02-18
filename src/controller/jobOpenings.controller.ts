@@ -85,6 +85,7 @@ export let updateOpenings = async (req, res, next) => {
                         qualifications: updateOpenings.qualifications,
                         extraQualifications:updateOpenings.extraQualifications,
                         email:updateOpenings.email,
+                        vacancies:updateOpenings.vacancies,
                         status:updateOpenings.status,
                         modifiedOn:updateOpenings.modifiedOn,
                         modifiedBy:updateOpenings.modifiedBy

@@ -16,7 +16,7 @@ router.get('/',
     getDevelopers
 );
 
-router.get('/getSingleService',   
+router.get('/getSingleDeveloper',   
     basicAuthUser,
     // checkSession,
     checkQuery('_id'),

@@ -8,6 +8,7 @@ export interface JobOpeningsDocument extends mongoose.Document {
     qualifications: any[];
     extraQualifications:any[];
     email:string;
+    vacancies:number;
     isDeleted?: boolean;
     status?: number;
     createdOn?: Date;
@@ -25,6 +26,7 @@ const joobOpeningsSchema = new mongoose.Schema(
         qualifications: [{ type: String }],
         extraQualifications:[{ type: String }],
        email:{ type: String },
+       vacancies:{ type: Number },
        isDeleted: { type: Boolean, default: false },
        status: { type: Number, default: 1 },
        createdOn: { type: Date },
