@@ -26,7 +26,7 @@ export let CreateJWTToken = (data: any = {}) => {
         tokenData['email'] = data['email']
     }
   
-    const token = jwt.sign(tokenData, 'PixaliveTech', { expiresIn: '365D' });
+    const token = jwt.sign(tokenData, 'PixaliveTech', { expiresIn: '7D' });
     return token;
 }
 

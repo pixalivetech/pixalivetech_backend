@@ -1,12 +1,11 @@
 import { Router } from 'express';
 const router: Router = Router();
 
-import  Admin  from "./adminPanel.routes"
-import Login from "./login.routes"
-import Contact from "./contactus.routes"
 
-router.use('/admin',Admin )
+import User from './user.routes'
+import Login from "./login.routes"
+
+router.use('/user',User)
 router.use('/login', Login)
-router.use('/contactus',Contact)
 
 export default router
