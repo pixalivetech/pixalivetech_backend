@@ -1,12 +1,11 @@
-import * as jwt from  'jsonwebtoken';
+import * as jwt from 'jsonwebtoken';
 import { response } from '../helper/commonResponseHandler';
 import { clientError, errorMessage } from '../helper/ErrorMessage';
-
 const activity = 'token';
 
 /**
- * @author Mohanraj V / Santhosh
- * @date 22-09-2023
+ * @author Mohanraj V
+ * @date 10-01-2024
  * @param {Object} req 
  * @param {Object} res 
  * @param {Function} next  
@@ -18,8 +17,8 @@ export let CreateJWTToken = (data: any = {}) => {
     if (data && data['id']) {
         tokenData['id'] = data['id']
     }
-    if (data && data['name']) {
-        tokenData['name'] = data['name']
+    if (data && data['email']) {
+        tokenData['email'] = data['email']
     }
 
     if (data && data['email']) {
@@ -33,8 +32,8 @@ export let CreateJWTToken = (data: any = {}) => {
 
 
 /**
- * @author Mohanraj V / Santhosh
- * @date 22-09-2023
+ * @author Mohanraj V
+ * @date 10-01-2024
  * @param {Object} req 
  * @param {Object} res 
  * @param {Function} next  
@@ -70,5 +69,3 @@ export let checkSession = async (req, res, next) => {
         return response(req, res, activity, 'Check-Session','Level-3',  false, 499, {}, clientError.token.unauthRoute);
     }
 }
-
-

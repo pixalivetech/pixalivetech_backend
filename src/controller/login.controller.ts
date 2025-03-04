@@ -1,67 +1,45 @@
-import { validationResult } from "express-validator"
-import { response } from "../helper/commonResponseHandler";
-import { decrypt } from "../helper/Encryption";
+import { Request, Response, NextFunction } from "express";
+import * as bcrypt from "bcryptjs";
 import * as TokenManager from "../utils/tokenManager";
+import { response } from "../helper/commonResponseHandler";
 import { clientError, errorMessage } from "../helper/ErrorMessage";
-import { Task, TaskDocument } from "../model/task.model";
+import { Admin } from "../model/admin.model";
 
-var activity = "Login User"
+const activity = "ADMIN";
 
-export let userLogin = async (req, res,next)=>{
-    const errors  = validationResult(req);
-    if (errors.isEmpty()) {
-        try {
-            const taskDetails :TaskDocument = req.body ;
-            const user = await Task.findOne({ $and : [{isDeleted:false},{email:req.body.email}]})
-        if (user) {
-            const pass = await decrypt(user["password"])
-            console.log(pass);
-            if (pass==req.body.password) {
-                 const token = await TokenManager.CreateJWTToken({
-                    id: user["_id"],
-                    name: user["name"],
-                 });    
-            let finalResult = {};
-            finalResult["loginType"] = 'User';
-            finalResult["userName"] = user.name;
-            finalResult["email"] = user.email;
-            finalResult["token"] = token;
-             response(req, res, activity, 'Level-2', 'user-login', true, 200, finalResult,clientError.success.loginSuccess) 
-            } else {
-            response(req,res,activity,'Level-3','user-Login',false,422,{},clientError.email.password)
+/**
+ * @author Sivakumar R
+ * @date 16-05-2024
+ * @description This function handles admin login.
+ */
+export const adminLogin = async (req: Request, res: Response, next: NextFunction) => {
+    try { 
+        const adminDetails=await Admin.findOne({ $and: [{ isDeleted: false },{ email: req.body.email }]});
+        if(adminDetails)
+        {
+            if(adminDetails["status"]===2){
+                response(req,res,activity,'Level-1','Login-Admin',false,499,{},clientError.account.inActive);
             }
-        } else {
-            response(req, res, activity, 'Level-3', 'user-login', false, 422, {}, "user is not found");
+             else if(adminDetails["password"]!== req.body.password){
+                response(req,res,activity,'Level-1','Login-Admin',false,200,{},"Password is MissMatch !")
+                }else{             
+                    const token=await TokenManager.CreateJWTToken({
+                        id:adminDetails["_id"],
+                        email:adminDetails["email"]
+                    });
+                    const details={}
+                    details['_id']=adminDetails._id;
+                    details['email']=adminDetails.email;
+                    let finalResult = {};
+                    finalResult["loginType"] = 'Admin';
+                    finalResult["adminDetails"] = details;
+                    finalResult["token"] = token;
+                    response(req,res,activity,'Level-1','Login-Admin',true,200,finalResult,clientError.success.loginSuccess)
+                }
+        }else{
+            response(req,res,activity,'Level-1','Login-Admin',false,200,{},"Admin Not Registered");
         }
-        
-        } catch (err:any) {
-            response(req,res,activity,'Level-3','user-login',false,422,{},errorMessage.internalServer,err.message);
-        }
-     } 
-     else {
-        response(req, res, activity, 'Level-3', 'user-login', false, 422, {}, errorMessage.fieldValidation, JSON.stringify(errors.mapped()));
+    } catch (err: any) {
+        response(req, res, activity, 'Level-3', 'Login-Admin', false, 500, {}, errorMessage.internalServer, err.message);
     }
- }
-
- export let verifyOtp = async(req,res,next) =>{
-   try {
-    const taskDetails :TaskDocument = req.body ;
-    const user = await Task.findOne({ $and : [{isDeleted:false},{email:req.body.email}]})
-    if (user) {
-        if(user.otp===req.body.otp){
-            response(req, res, activity, 'Level-2', 'user-login', true, 200,{},clientError.otp.otpVerifySuccess) 
-        }
-        else{
-            response(req, res, activity, 'Level-3', 'user-login', true, 200, {},clientError.otp.otpDoestMatch) ;
-        }
-    } else {
-        response(req, res, activity, 'Level-3', 'user-login', false, 422, {}, "user is not found");
-
-    }
-   } catch (err:any) {
-    response(req,res,activity,'Level-3','user-login',false,422,{},errorMessage.internalServer,err.message);
-   }
- }
- 
-
-   
+};

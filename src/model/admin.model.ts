@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
     userName: { type: String },
     mobile: { type: Number },
     email: { type: String, lowercase: true, trim: true },
-    password: { type: String },
+    password: { type: String,  }, 
     isDeleted: { type: Boolean, default: false },
     status: { type: Number, default: 1 },
     createdOn: { type: Date },
@@ -29,4 +29,4 @@ const userSchema = new mongoose.Schema({
 });
 
 
-export const Admin = mongoose.model("Admin", userSchema);
+export const Admin = mongoose.model("AdminPanel", userSchema);

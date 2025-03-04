@@ -130,5 +130,9 @@ export let clientError = Object.freeze({
 
     code: {
         successCode: 200
+    },
+
+    auth:{
+        invalidCredentials: 'Invalid credentials',
     }
 });

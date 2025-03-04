@@ -1,24 +1,16 @@
-import {Router} from 'express';
-import {  userLogin, verifyOtp } from '../controller/login.controller';
-import {  checkRequestBodyParams } from '../middleware/Validators';
+import { Router} from 'express'; 
+import { checkRequestBodyParams } from '../middleware/Validators';
 import { basicAuthUser } from '../middleware/checkAuth';
-import { checkSession } from '../utils/tokenManager';
+import { checkSession } from "../utils/tokenManager";
+import { adminLogin } from '../controller/login.controller';
 
-const router:Router=Router();
+const router : Router = Router();
 
 
-router.post('/loginuser', // login user 
+router.post ('/adminLogin',
     basicAuthUser,
-    checkRequestBodyParams("email"),
-    checkRequestBodyParams("password"),
-    userLogin
-);
-
-router.post('/verifyotp', // verify otp 
-    basicAuthUser,
-    checkSession,
-    checkRequestBodyParams("email"),
-    verifyOtp
-);
+    checkRequestBodyParams('email'),
+    checkRequestBodyParams('password'),
+    adminLogin);
 
 export default router;
