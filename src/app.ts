@@ -38,6 +38,9 @@ export const app: any = {
 	},
 	initRoutes() {
 		this.instance.use(express.static(path.join(__dirname, 'dist')));
+		this.instance.get('/', (req, res) => {
+			res.send('welcome to pixalive technology pvt ltd');
+		  });
 		this.instance.use('/api', routes);
 		this.instance.get('*', (req, res) => {
 			res.sendFile(path.join(__dirname, 'dist/index.html'));
